@@ -1,0 +1,6 @@
+using GLPK
+using JuMP
+
+# Define the model
+
+
