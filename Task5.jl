@@ -3,8 +3,6 @@
 ##### 
 # Parameters 
 #####
-# Hej karen
-
 # holding cost 
 h = [1 1]
 # setup cost
