@@ -5,10 +5,16 @@ include("task4-Data.jl")
 # dual variables from master problem:
 # it 1: 
 # piVal = [0, 0, 0]
-# kappa = [3.0, 6.0]
+# kappa = [3.0, 9.0]
 # it 2: 
-piVal = [0.0, -0.4, 0.0]
-kappa = [5.4, 7.2]
+# piVal = [0.0, -1.0, 0.0]
+# kappa = [9.0, 12.0]
+# it 3: 
+# piVal = [0.0, -0.5, 0.0]
+# kappa = [6.0, 8.0]
+# it 4: 
+piVal = [0.0, -0.5, -0.3333333333333333333]
+kappa = [8.3333333333333, 8.0]
 
 for k in 1:K
     sub = Model(GLPK.Optimizer)

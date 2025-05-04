@@ -47,12 +47,13 @@ function setupMaster(A0, b0, c_full, X1_1, X1_2)
     # Start with “do nothing” for each product:
     #X[1] = [3 4 5 1 1 1 0 0 0]'   # one seed‐column for product 1
     #X[2] = [3 2 2 1 1 1 0 0 0]'  # one seed‐column for product 2
-    Z1 = [3 4 5 1 1 1 0 0 0]'
-    Z2 = [3 2 2 1 1 1 0 0 0]'
+    X1 = [3 4 5 1 1 1 0 0 0]'
+    X2 = [3 2 2 1 1 1 3 0 0]'
     Xfull = hcat(
-        vcat(Z1, zeros(length(Z2))),   # product 1 = all zero
-        vcat(zeros(length(Z1)), Z2)    # product 2 = all zero
+        vcat(X1, zeros(length(X2))),   # product 1 = all zero
+        vcat(zeros(length(X1)), X2)    # product 2 = all zero
     )
+    
     p1Count = 1   # one dummy column for product 1
     p2Count = 1   # one dummy column for product 2
     #BIGP = 100000 
@@ -65,7 +66,8 @@ function setupMaster(A0, b0, c_full, X1_1, X1_2)
     # convexity per product
     conv1 = @constraint(master, sum(λ[j] for j=1:p1Count) == 1)
     conv2 = @constraint(master, sum(λ[j] for j=p1Count+1:p1Count+p2Count) == 1)
-    return master, consCap, (conv1,conv2), Xfull
+    
+    return master, consCap, (conv1,conv2), Xfull, λ
 end
 
 """
@@ -111,7 +113,8 @@ end
 Runs the full column‐generation loop with two independent subproblems.
 """
 function DWColGen(A0, A1_1, b1_1, c_sub1, A1_2, b1_2, c_sub2, b0, c_full, X1_1, X1_2)
-    master, consCap, convs, Xfull = setupMaster(A0, b0, c_full, X1_1, X1_2)
+    master, consCap, convs, Xfull, λ = setupMaster(A0, b0, c_full, X1_1, X1_2)
+    #display(Xfull)
     sub1, x1, y1, s1 = setupSubModel(A1_1, b1_1)
     sub2, x2, y2, s2 = setupSubModel(A1_2, b1_2)
     iter = 0
@@ -132,8 +135,8 @@ function DWColGen(A0, A1_1, b1_1, c_sub1, A1_2, b1_2, c_sub2, b0, c_full, X1_1, 
         iter += 1
         println("Iteration $iter  |  master obj = $(objective_value(master))  |  red₁ = $r1  |  red₂ = $r2")
         println("Iteration $iter  |  pi = $pi   |  kappa1 = $kappa1  |  kappa2 = $kappa2  |")
-        println("Iteration $iter  |  Adding pattern to P1: $p1  |")
-        println("Iteration $iter  |  Adding pattern to P2: $p2  |")
+        println("Iteration $iter  |  Adding column to P1: $p1  |")
+        println("Iteration $iter  |  Adding column to P2: $p2  |")
         println("-"^100)
 
         added = false
@@ -155,6 +158,7 @@ function DWColGen(A0, A1_1, b1_1, c_sub1, A1_2, b1_2, c_sub2, b0, c_full, X1_1, 
     end
 
     println("Done after $iter iterations.  Final master obj = $(objective_value(master))")
+
 end
 
 """

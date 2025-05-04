@@ -18,7 +18,7 @@ include("task4-Data.jl")
 # replace the following with your actual initialization:
 X = Vector{Matrix{Float64}}(undef, K)
 X[1] = [3 4 5 1 1 1 0 0 0]'   # one seed‐column for product 1
-X[2] = [3 2 2 1 1 1 0 0 0]'  # one seed‐column for product 2
+X[2] = [3 2 2 1 1 1 3 0 0]'  # one seed‐column for product 2
 P = [1,1]                # P[k] number of extreme points for polyhedron k
 println("X[1] = ", X[1])
 println("X[2] = ", X[2])

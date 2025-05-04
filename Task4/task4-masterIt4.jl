@@ -17,11 +17,11 @@ include("task4-Data.jl")
 # replace the following with your actual initialization:
 X = Vector{Matrix{Float64}}(undef, K)
 X[1] = [3 4 5 1 1 1 0 0 0; 7.0 0.0 5.0 1.0 0.0 1.0 4.0 0.0 0.0]'   # one seed‐column for product 1
-X[2] = [3 2 2 1 1 1 3 0 0; 0.0 7.0 0.0 0.0 1.0 0.0 0.0 2.0 0.0; 5.0 0.0 2.0 1.0 0.0 1.0 5.0 0.0 0.0]'  # one seed‐column for product 2println("X[1] = ", X[1])
+X[2] = [3 2 2 1 1 1 3 0 0; 0.0 7.0 0.0 0.0 1.0 0.0 0.0 2.0 0.0; 5.0 0.0 2.0 1.0 0.0 1.0 5.0 0.0 0.0; 0.0 5.0 2.0 0.0 1.0 1.0 0.0 0.0 0.0]'  # one seed‐column for product 2println("X[1] = ", X[1])
 println("X[1] = ", X[1])
 println("X[2] = ", X[2])
 
-P = [2,3]                # P[k] number of extreme points for polyhedron k
+P = [2,4]                # P[k] number of extreme points for polyhedron k
 println("P = ",P)
 #display(P)
 # build the master
@@ -60,5 +60,8 @@ if termination_status(master) == MOI.OPTIMAL
 else
     error("Master not optimal: ", termination_status(master))
 end
-
+    lambdavals = [value.(lambda[i]) for i in 1:K]
+    println(lambdavals)
+    println(X[1])
+    println(X[2])
 end
