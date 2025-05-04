@@ -36,7 +36,9 @@ A = [
     0 1 0   0 2 0   0 0 0   0 1 0   0 1 0   0 0 0;
     0 0 1   0 0 2   0 0 0   0 0 1   0 0 1   0 0 0
 ]
-b = [3, 0, 4, 5, 5, 2, 0,0,0,0,0,0, 1,0, 10,10,10] # change fixed branch value to 0 or 1
+b = [3, 0, 4, 5, 5, 2, 0,0,0,0,0,0, 1,0, 10,10,10] # change fixed branch value to 1
+# b = [3, 0, 4, 5, 5, 2, 0,0,0,0,0,0, 0,0, 10,10,10] # change fixed branch value to 0
+
 # master slices
 A0 = A[15:17, :]
 b0 = b[15:17]
@@ -82,7 +84,7 @@ for k in 1:K
     A0_V[k] = A0[:, V[k]]
 end
 
-display(CV)
-display(A_V)
-display(b_sub)
+# display(CV)
+# display(A_V)
+# display(b_sub)
 
