@@ -46,7 +46,7 @@ for k in 1:K
 
     # 6) Branch constraint 
     @constraint(sub,
-       A_V[k][7, :] * vec <= b_sub[k][7]
+       dot(A_V[k][7,:],vec) <= b_sub[k][7]
     )
 
     optimize!(sub)
