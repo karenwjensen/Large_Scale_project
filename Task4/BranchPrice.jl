@@ -74,3 +74,32 @@ for k in 1:K
         error("Subproblem $k failed with status ", termination_status(sub))
     end
 end
+# build full A (15×18) and b (15) exactly as in your framework
+A = [
+    # flow eq & inventory linking for both products
+    1 0 0   0 0 0  -1 0 0   0 0 0   0 0 0  0 0 0;
+    0 0 0   0 0 0   0 0 0   1 0 0   0 0 0  -1 0 0;
+    0 1 0   0 0 0   1 -1 0   0 0 0   0 0 0   0 0 0;
+    0 0 1   0 0 0   0 1 -1   0 0 0   0 0 0   0 0 0;
+    0 0 0   0 0 0   0 0 0   0 1 0   0 0 0   1 -1 0;
+    0 0 0   0 0 0   0 0 0   0 0 1   0 0 0   0 1 -1;
+    # big-M
+    1 0 0  -12 0 0   0 0 0   0 0 0   0 0 0   0 0 0;
+    0 1 0   0 -12 0  0 0 0   0 0 0   0 0 0   0 0 0;
+    0 0 1   0 0 -12  0 0 0   0 0 0   0 0 0   0 0 0;
+    0 0 0   0 0 0   0 0 0   1 0 0  -12 0 0   0 0 0;
+    0 0 0   0 0 0   0 0 0   0 1 0   0 -12 0   0 0 0;
+    0 0 0   0 0 0   0 0 0   0 0 1   0 0 -12  0 0 0;
+    # Branch 
+    0 0 0   0 1 0   0 0 0   0 0 0   0 0 0  0 0 0;
+    0 0 0   0 1 0   0 0 0   0 0 0   0 0 0  0 0 0;
+    # capacity ≤ 10 in each period
+    1 0 0   2 0 0   0 0 0   1 0 0   1 0 0   0 0 0;
+    0 1 0   0 2 0   0 0 0   0 1 0   0 1 0   0 0 0;
+    0 0 1   0 0 2   0 0 0   0 0 1   0 0 1   0 0 0
+]
+b = [3, 0, 4, 5, 5, 2, 0,0,0,0,0,0,0,1, 10,10,10]
+# master slices
+A0 = A[15:17, :]
+b0 = b[15:17]
+# number of subproblems
