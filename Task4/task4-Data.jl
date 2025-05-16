@@ -37,6 +37,7 @@ b = [3, 0, 4, 5, 5, 2, 0,0,0,0,0,0, 10,10,10]
 # master slices
 A0 = A[13:15, :]
 b0 = b[13:15]
+#println(b0)
 # number of subproblems
 K = 2
 

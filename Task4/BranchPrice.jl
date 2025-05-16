@@ -5,17 +5,23 @@ include("task4-Data.jl")
 #include("task4-masterIt4.jl")
 
 X = Vector{Matrix{Float64}}(undef, K)
-X[1] = [3 4 5 1 1 1 0 0 0; 7.0 0.0 5.0 1.0 0.0 1.0 4.0 0.0 0.0]'   # one seed‐column for product 1
-X[2] = [3 2 2 1 1 1 3 0 0; 0.0 7.0 0.0 0.0 1.0 0.0 0.0 2.0 0.0; 5.0 0.0 2.0 1.0 0.0 1.0 5.0 0.0 0.0; 0.0 5.0 2.0 0.0 1.0 1.0 0.0 0.0 0.0]'  # one seed‐column for product 2println("X[1] = ", X[1])
-lambdavals = [[0.6666666666666662, 0.3333333333333338], [0.0, 5.329070518200751e-16, 0.0, 1.0]]
+X[1] = [7 0 5 1 0 1 4 0 0; 3.0 4.0 5.0 1.0 1.0 1.0 0.0 0.0 0.0]'   # one seed‐column for product 1
+X[2] = [0 5 2 0 1 1 0 0 0]' 
+lambdavals = [[0.33333333333333337, 0.6666666666666666], [1.0000000000000002]]
 variables_p1 = X[1]*lambdavals[1]
 variables_p2 = X[2] * lambdavals[2] 
 y1_star = variables_p1[4:6]
 y2_star = variables_p2[4:6]
-
-
+x1_star = variables_p1[1:3]
+x2_star = variables_p2[1:3]
+s1_star = variables_p1[7:9]
+s2_star = variables_p2[7:9]
 println("y1* = ",y1_star)
 println("y2* = ",y2_star)
+println("x1* = ",x1_star)
+println("x2* = ",x2_star)
+println("s1* = ",s1_star)
+println("s2* = ",s2_star)
 
 # dual variables from master problem:
 # it 1: 
@@ -28,8 +34,8 @@ println("y2* = ",y2_star)
 # piVal = [0.0, -0.5, 0.0]
 # kappa = [6.0, 8.0]
 # it 4: 
-piVal = [0.0, -0.5, -0.3333333333333333333]
-kappa = [8.3333333333333, 8.0]
+piVal = [0.0, -0.5, 0.0]
+kappa = [6.0, 7.0]
 
 for k in 1:K
     sub = Model(GLPK.Optimizer)

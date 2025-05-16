@@ -2,19 +2,22 @@ using JuMP, GLPK, LinearAlgebra
 
 include("task6-Data.jl")
 
-# dual variables from master problem:
+# Branch y=0
+# it 1: 
+# piVal = [0, 0, 0]
+# kappa = [6.0, 4.0]
+# it 2: 
+# piVal = [0.0, 0.0, 0.0]
+# kappa = [6.0, 4.0]
+
+# Branch y=1
 # it 1: 
 piVal = [0, 0, 0]
-kappa = [3.0, 9.0]
+kappa = [6.0, 4.0]
 # it 2: 
-# piVal = [0.0, -1.0, 0.0]
-# kappa = [9.0, 12.0]
-# it 3: 
 # piVal = [0.0, -0.5, 0.0]
-# kappa = [6.0, 8.0]
-# it 4: 
-# piVal = [0.0, -0.5, -0.3333333333333333333]
-# kappa = [8.3333333333333, 8.0]
+# kappa = [6.0, 7.0]
+
 
 for k in 1:K
     sub = Model(GLPK.Optimizer)
@@ -26,7 +29,7 @@ for k in 1:K
 
     # 2) Build a single 9-vector [ x; y; s ]
     vec = vcat(x,y,s)
-    print(vec)
+    
     # 3) Reduced-cost objective
     @objective(sub, Min,
         dot(CV[k],            vec)  # production+setup+hold
@@ -46,8 +49,9 @@ for k in 1:K
 
     # 6) Branch constraint 
     @constraint(sub,
-       dot(A_V[k][7,:],vec) <= b_sub[k][7]
+       dot(A_V[k][7,:],vec) == b_sub[k][7]
     )
+    
 
     optimize!(sub)
     if termination_status(sub) == MOI.OPTIMAL

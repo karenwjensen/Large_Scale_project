@@ -51,7 +51,7 @@ model = Model(Gurobi.Optimizer)
 # Model - LP relaxation 
 model_LP = Model(Gurobi.Optimizer)
 
-@variable(model_LP, y_LP[1:num_products, 1:num_periods], Bin)         # setup indicator
+@variable(model_LP, 0 <= y_LP[1:num_products, 1:num_periods] <= 1)         # setup indicator
 @variable(model_LP, 0 <= x_LP[1:num_products, 1:num_periods] <= M2)   # production qty
 @variable(model_LP, 0 <= s_LP[1:num_products, 1:num_periods] <= M3)   # end-period inventory
 

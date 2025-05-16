@@ -16,8 +16,8 @@ include("task4-Data.jl")
 
 # replace the following with your actual initialization:
 X = Vector{Matrix{Float64}}(undef, K)
-X[1] = [3 4 5 1 1 1 0 0 0; 7.0 0.0 5.0 1.0 0.0 1.0 4.0 0.0 0.0]'   # one seed‐column for product 1
-X[2] = [3 2 2 1 1 1 3 0 0; 0.0 7.0 0.0 0.0 1.0 0.0 0.0 2.0 0.0; 5.0 0.0 2.0 1.0 0.0 1.0 5.0 0.0 0.0]'  # one seed‐column for product 2println("X[1] = ", X[1])
+X[1] = [7 0 5 1 0 1 4 0 0; 3.0 4.0 5.0 1.0 1.0 1.0 0.0 0.0 0.0]'   # one seed‐column for product 1
+X[2] = [0 5 2 0 1 1 0 0 0]'  # one seed‐column for product 2#println("X[2] = ", X[2])
 println("X[1] = ", X[1])
 println("X[2] = ", X[2])
 

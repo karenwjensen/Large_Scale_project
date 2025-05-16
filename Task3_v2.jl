@@ -47,8 +47,8 @@ function setupMaster(A0, b0, c_full, X1_1, X1_2)
     # Start with “do nothing” for each product:
     #X[1] = [3 4 5 1 1 1 0 0 0]'   # one seed‐column for product 1
     #X[2] = [3 2 2 1 1 1 0 0 0]'  # one seed‐column for product 2
-    X1 = [3 4 5 1 1 1 0 0 0]'
-    X2 = [3 2 2 1 1 1 3 0 0]'
+    X1 = [7 0 5 1 0 1 4 0 0]'
+    X2 = [0 5 2 0 1 1 0 0 0]'
     Xfull = hcat(
         vcat(X1, zeros(length(X2))),   # product 1 = all zero
         vcat(zeros(length(X1)), X2)    # product 2 = all zero
