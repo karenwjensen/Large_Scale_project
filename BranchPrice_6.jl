@@ -32,5 +32,7 @@ y2_star = variables_p2[4:6]
 
 println("y1* = ",y1_star)
 println("y2* = ",y2_star)
+println("Variables p1 = ",variables_p1)
+println("Variables p2 = ",variables_p2)
 
 

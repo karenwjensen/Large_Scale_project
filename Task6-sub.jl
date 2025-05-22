@@ -12,11 +12,11 @@ include("task6-Data.jl")
 
 # Branch y=1
 # it 1: 
-piVal = [0, 0, 0]
-kappa = [6.0, 4.0]
+# piVal = [0, 0, 0]
+# kappa = [6.0, 4.0]
 # it 2: 
-# piVal = [0.0, -0.5, 0.0]
-# kappa = [6.0, 7.0]
+piVal = [0.0, -0.5, 0.0]
+kappa = [6.0, 7.0]
 
 
 for k in 1:K
@@ -56,6 +56,7 @@ for k in 1:K
     optimize!(sub)
     if termination_status(sub) == MOI.OPTIMAL
         rc, patt = objective_value(sub), value.(vec)
+        println("Subproblem Iteration 2")
         println("--- Subproblem $k optimal:  reduced cost = $rc")
         println("   pattern = ", patt)
     else

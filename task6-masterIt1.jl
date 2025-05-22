@@ -8,6 +8,9 @@ X = Vector{Matrix{Float64}}(undef, K)
 X[1] = [7 0 5 1 0 1 4 0 0]'   # one seed‐column for product 1
 X[2] = [0 5 2 0 1 1 0 0 0]' 
 P = [1,1]                # P[k] number of extreme points for polyhedron k
+println("-"^50)
+println("Master Iteration 1 - y_12 = 1")
+println("-"^50)
 println("X[1] = ", X[1])
 println("X[2] = ", X[2])
 println("P = ",P)
@@ -48,5 +51,6 @@ if termination_status(master) == MOI.OPTIMAL
 else
     error("Master not optimal: ", termination_status(master))
 end
+println("-"^50)
 
 end

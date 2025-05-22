@@ -2,18 +2,6 @@ module test
 
 using JuMP, GLPK, LinearAlgebra
 include("task6-Data.jl")
-#         A0_V (Vector of 3×ni capacity‐mats),
-#         b0  (length-3 capacity RHS)
-
-# -------------------------------------------------------------------
-# Suppose we already have for each subproblem i = 1:K an initial
-#  set of extreme patterns X[i] of size (ni×P[i]).  For example:
-#    X[1] = [3  …  ; 4 … ; 5 … ; 1 … ; 1 … ; 1 … ; 0 … ; 0 … ; 0 …]
-#    X[2] = [ … ]
-# and so on, where ni=9 here.
-# P[i] = number of columns in X[i].
-# -------------------------------------------------------------------
-
 # replace the following with your actual initialization:
 X = Vector{Matrix{Float64}}(undef, K)
 X[1] = [7 0 5 1 0 1 4 0 0; 3.0 4.0 5.0 1.0 1.0 1.0 0.0 0.0 0.0]'   # one seed‐column for product 1
@@ -21,6 +9,9 @@ X[2] = [0 5 2 0 1 1 0 0 0]'  # one seed‐column for product 2println("X[1] = ",
 #println("X[2] = ", X[2])
 
 P = [2,1]                # P[k] number of extreme points for polyhedron k
+println("-"^50)
+println("Master Iteration 2 - y_12 = 1")
+println("-"^50)
 println("P = ",P)
 #display(P)
 # build the master

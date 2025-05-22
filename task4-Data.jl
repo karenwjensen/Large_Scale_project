@@ -12,7 +12,6 @@ c_full  = vcat(c_sub1, c_sub2)
 d = [3,4,5,  0,5,2]  # first 3 for product1, next 3 for product2
 #display(d)
 
-# build full A (15×18) and b (15) exactly as in your framework
 A = [
     # flow eq & inventory linking for both products
     1 0 0   0 0 0  -1 0 0   0 0 0   0 0 0  0 0 0;
